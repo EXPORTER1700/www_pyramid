@@ -1,6 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AdminGuard } from '@app/user/guards/admin.guard';
 import { StatisticService } from '@app/statistic/statistic.service';
+import { AllStatisticResponseInterface } from '@app/statistic/types/allStatisticResponse.interface';
 
 @Controller('statistic')
 export class StatisticController {
@@ -8,7 +9,7 @@ export class StatisticController {
 
   @Get()
   @UseGuards(AdminGuard)
-  async getAll() {
+  async getAll(): Promise<AllStatisticResponseInterface> {
     return await this.statisticService.getAll();
   }
 }
