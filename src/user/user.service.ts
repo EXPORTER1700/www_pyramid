@@ -13,6 +13,7 @@ import { sign } from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { FindAllUsersQueryInterface } from '@app/user/types/FindAllUsersQuery.interface';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { ProfitEnum } from '@app/user/types/profit.enum';
 
 @Injectable()
 export class UserService {
@@ -50,7 +51,7 @@ export class UserService {
       queryBuilder.limit(query.limit);
     }
 
-    if (query.limit) {
+    if (query.offset) {
       queryBuilder.offset(query.offset);
     }
 
@@ -187,9 +188,9 @@ export class UserService {
 
     await Promise.all(
       investors.map(async (investor) => {
-        const investorProfit = investor.balance * 0.01;
+        const investorProfit = investor.balance * ProfitEnum.INVESTOR;
         investor.balance += investorProfit;
-        investor.inviter.balance += investorProfit * 0.1;
+        investor.inviter.balance += investorProfit * ProfitEnum.INVITER;
         await this.userRepository.save(investor.inviter);
         return await this.userRepository.save(investor);
       }),
