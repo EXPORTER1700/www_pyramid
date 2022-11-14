@@ -1,3 +1,5 @@
+<a href="https://www.getpostman.com/collections/aba161a22be16f83373d">Postman collection</a>
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
